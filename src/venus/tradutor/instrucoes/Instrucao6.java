@@ -24,7 +24,7 @@ public class Instrucao6 {
      * @return String da instrucao pronta para ser escrita
      */
     public String getBin(){
-        int conta = (short)((func << 14) | (op << 12) | (r << 11) | (dontCare << 3) | rb);
+        int conta = (short)((func << 14) | (op << 12) | (r << 11) | (dontCare << 3) | (rb&0b111));
         String retorno = Integer.toBinaryString(conta);
         String aux = "";
         for(int i = 0;i < 16 - retorno.length();i++){
