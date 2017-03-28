@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import venus.persist.Dicionario;
 import venus.tradutor.Arquivo;
+import venus.tradutor.instrucoes.Halt;
 import venus.tradutor.instrucoes.Instrucao;
 import venus.tradutor.instrucoes.Instrucao1;
 import venus.tradutor.instrucoes.Instrucao2;
@@ -127,7 +128,7 @@ public class Tradutor {
         return new Instrucao3(func, rc, r, (short) 0, offset8);
     }
 
-    private Instrucao factoryTipo4(String instrucao,short pc) {
+    private Instrucao factoryTipo4(String instrucao, short pc) {
         //System.err.println("Instrucao: F4: " + instrucao);
         String[] parts = instrucao.split(" ");
         //System.err.println("Parte 0: " + parts[0]);
@@ -137,18 +138,25 @@ public class Tradutor {
         short op = dic.getOp(funcao[0]);
         short cond = dic.getCond(funcao[1]);
         short offset8 = labels.get(parts[1]);
-        offset8 = (short) (offset8 - pc);
+        offset8 = ((short) (offset8 - pc));
+        System.err.println("FUNC: "+func);
+        System.err.println("OP: "+op);
+        System.err.println("COND: "+cond);
+        System.err.println("OFSSET: "+offset8);
         return new Instrucao4(func, op, cond, offset8);
     }
 
-    private Instrucao factoryTipo5(String instrucao,int pc) {
+    private Instrucao factoryTipo5(String instrucao, int pc) {
         String[] parts = instrucao.split(" ");
         short func = dic.getFunc(parts[0]);
         short op = dic.getOp(parts[0]);
         short offset12 = labels.get(parts[1]);
         offset12 = (short) (offset12 - pc);
-        return new Instrucao5(func, op, offset12);
-
+        if (offset12 == 0) {
+            return new Halt();
+        } else {
+            return new Instrucao5(func, op, offset12);
+        }
     }
 
     private Instrucao factoryTipo6(String instrucao) {
@@ -179,13 +187,15 @@ public class Tradutor {
     }
 
     private ArrayList<Instrucao> factory(String arq) {
+        System.err.println("Arq Entrada:\n---------------\n"+arq+"\n---------------\n");
         ArrayList<Instrucao> bins = new ArrayList();
         String instrucoes[] = arq.split("\n");
         short pc = 0;
         for (String instrucao : instrucoes) {
+            System.err.println("PC:"+pc);
             String[] parts = instrucao.split(" ");
             if (parts[0].contains(".")) {
-                bins.add(factoryTipo4(instrucao,pc));
+                bins.add(factoryTipo4(instrucao, pc));
             } else {
                 String operacao = parts[0];
 //                System.err.println("Instrucao: " + instrucao);
@@ -211,18 +221,19 @@ public class Tradutor {
                         op = dic.getOp(operacao);
                         switch (op) {
                             case 2:
-                                bins.add(factoryTipo5(instrucao,pc));
+                                bins.add(factoryTipo5(instrucao, pc));
                                 break;
                             case 3:
                                 bins.add(factoryTipo6(instrucao));
                                 break;
                             default:
-                                bins.add(factoryTipo4(instrucao,pc));
+                                bins.add(factoryTipo4(instrucao, pc));
                                 break;
                         }
 
                 }
             }
+            pc++;
         }
         return bins;
     }
@@ -232,8 +243,10 @@ public class Tradutor {
         String[] instrucoes = arq.split("\n");
         short line = 0;
         for (String instrucao : instrucoes) {
+            
             if (instrucao.contains(":")) {
                 String[] retorno = instrucao.split(":");
+                retorno[1] = retorno[1].trim();
                 labels.add(retorno[0], line);
                 arqFinal += retorno[1] + "\n";
             } else {

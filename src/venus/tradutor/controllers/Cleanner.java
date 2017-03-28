@@ -24,8 +24,8 @@ public class Cleanner {
     public String clean(String arq) {
         arq = removerComentarios(arq);
         arq = removerTabs(arq);
-        arq = removerEspacos(arq);
         arq = removerVacuos(arq);
+        arq = removerEspacos(arq);
         arq = corrigirLabels(arq);
         return arq;
     }

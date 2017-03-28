@@ -19,7 +19,7 @@ public class Venus {
      */
     public static void main(String[] args) {
         System.out.println("traduzir");
-        String nomeOrigen = "logica.asm";
+        String nomeOrigen = "multiplica.asm";
         String nomeDestino = "teste1.txt";
         Tradutor instance = Tradutor.getInstance();
         instance.traduzir(nomeOrigen, nomeDestino);

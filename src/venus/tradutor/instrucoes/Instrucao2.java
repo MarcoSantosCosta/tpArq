@@ -20,7 +20,7 @@ public class Instrucao2 implements Instrucao{
      * @return String da instrucao pronta para ser escrita
      */
     public String getBin(){
-        int conta = (short)((func << 14) | (rc << 11) | off);
+        int conta = ((func << 14) | (rc << 11) | off);
         String retorno = Integer.toBinaryString(conta);
         String aux = "";
         for(int i = 0;i < 16 - retorno.length();i++){
