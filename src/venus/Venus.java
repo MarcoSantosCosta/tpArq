@@ -17,9 +17,8 @@ public class Venus {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        System.out.println("traduzir");
-        String nomeOrigen = "multiplica.asm";
+    public static void main(String[] args) {       
+        String nomeOrigen = args[0];
         String nomeDestino = "teste1.txt";
         Tradutor instance = Tradutor.getInstance();
         instance.traduzir(nomeOrigen, nomeDestino);

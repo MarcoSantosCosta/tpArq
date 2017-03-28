@@ -4,37 +4,35 @@ package venus.tradutor.instrucoes;
  *
  * @author neche
  */
-public class Instrucao6 implements Instrucao {
-
+public class Instrucao6 implements Instrucao{
     private short func;
     private short op;
     private short r;
     private short dontCare;
     private short rb;
-
-    public Instrucao6(short func, short op, short r, short dontCare, short rb) {
+    
+    public Instrucao6(short func,short op,short r,short dontCare,short rb){
         this.func = func;
         this.op = op;
         this.r = r;
         this.dontCare = dontCare;
         this.rb = rb;
     }
-
+    
     /**
      * Retorna a instrucao em forma de binario
-     *
      * @return String da instrucao pronta para ser escrita
      */
-    public String getBin() {
-        int conta = (short) ((func << 14) | (op << 12) | (r << 11) | (dontCare << 3) | rb);
+    public String getBin(){
+        int conta = (short)((func << 14) | (op << 12) | (r << 11) | (dontCare << 3) | (rb&0b111));
         String retorno = Integer.toBinaryString(conta);
         String aux = "";
-        for (int i = 0; i < 16 - retorno.length(); i++) {
+        for(int i = 0;i < 16 - retorno.length();i++){
             aux += "0";
         }
         return (aux + retorno);
     }
-
+    
     /**
      * @return the func
      */
@@ -104,5 +102,5 @@ public class Instrucao6 implements Instrucao {
     public void setRb(short rb) {
         this.rb = rb;
     }
-
+    
 }

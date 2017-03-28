@@ -8,7 +8,7 @@ package venus.tradutor.controllers;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import venus.persist.Dicionario;
-import venus.tradutor.Arquivo;
+import venus.persist.Arquivo;
 import venus.tradutor.instrucoes.Halt;
 import venus.tradutor.instrucoes.Instrucao;
 import venus.tradutor.instrucoes.Instrucao1;
@@ -55,7 +55,8 @@ public class Tradutor {
         String arq = arquivo.ler(nomeOrigen);
         arq = cleanner.clean(arq);
         arq = lerLabels(arq);
-
+//        System.err.println("LABELS TEST");
+//        labels.test();
         ArrayList<Instrucao> instrucoes = factory(arq);
         escrever(instrucoes, nomeDestino);
     }
@@ -119,12 +120,21 @@ public class Tradutor {
     }
 
     private Instrucao factoryTipo3(String instrucao) {
+        System.out.println("INSTRUCAO: " + instrucao);
         String[] parts = instrucao.split(" ");
-        String[] parametros = parts[2].split(",");
+        System.out.println("PART 0: " + parts[0]);
+        String[] parametros = parts[1].split(",");
         short func = dic.getFunc(parts[0]);
         short rc = dic.getReg(parametros[0]);
         short r = dic.getR(parts[0]);
-        short offset8 = Short.parseShort(parametros[1]);
+        short offset8 = 0;
+        int temp = Integer.parseInt(parametros[1]);
+        if (r == 0) {
+            offset8 = (short) (temp & 0b11111111);
+        } else {
+            temp = (short) (temp >>> 8);
+            offset8 = (short) (temp & 0b11111111);
+        }
         return new Instrucao3(func, rc, r, (short) 0, offset8);
     }
 
@@ -139,10 +149,10 @@ public class Tradutor {
         short cond = dic.getCond(funcao[1]);
         short offset8 = labels.get(parts[1]);
         offset8 = ((short) (offset8 - pc));
-        System.err.println("FUNC: "+func);
-        System.err.println("OP: "+op);
-        System.err.println("COND: "+cond);
-        System.err.println("OFSSET: "+offset8);
+        System.err.println("FUNC: " + func);
+        System.err.println("OP: " + op);
+        System.err.println("COND: " + cond);
+        System.err.println("OFSSET: " + offset8);
         return new Instrucao4(func, op, cond, offset8);
     }
 
@@ -187,12 +197,12 @@ public class Tradutor {
     }
 
     private ArrayList<Instrucao> factory(String arq) {
-        System.err.println("Arq Entrada:\n---------------\n"+arq+"\n---------------\n");
+        System.err.println("Arq Entrada:\n---------------\n" + arq + "\n---------------\n");
         ArrayList<Instrucao> bins = new ArrayList();
         String instrucoes[] = arq.split("\n");
         short pc = 0;
         for (String instrucao : instrucoes) {
-            System.err.println("PC:"+pc);
+            System.err.println("PC:" + pc);
             String[] parts = instrucao.split(" ");
             if (parts[0].contains(".")) {
                 bins.add(factoryTipo4(instrucao, pc));
@@ -243,7 +253,7 @@ public class Tradutor {
         String[] instrucoes = arq.split("\n");
         short line = 0;
         for (String instrucao : instrucoes) {
-            
+
             if (instrucao.contains(":")) {
                 String[] retorno = instrucao.split(":");
                 retorno[1] = retorno[1].trim();
@@ -252,6 +262,7 @@ public class Tradutor {
             } else {
                 arqFinal += instrucao + "\n";
             }
+            line++;
         }
         return arqFinal;
     }

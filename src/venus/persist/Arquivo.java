@@ -1,4 +1,4 @@
-package venus.tradutor;
+package venus.persist;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

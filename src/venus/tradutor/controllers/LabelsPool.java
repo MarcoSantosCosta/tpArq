@@ -35,4 +35,10 @@ public class LabelsPool {
     public Short get(String key){
         return mapLabels.get(key);        
     }
+    
+    public void test(){
+        for (String s:mapLabels.keySet()){
+            System.err.println(s+"-"+mapLabels.get(s));
+        }
+    }
 }
