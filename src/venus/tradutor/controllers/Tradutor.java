@@ -34,7 +34,7 @@ public class Tradutor {
      * convertido.
      */
     public void traduzir(String nomeOrigen, String nomeDestino) {
-
+        
     }
 
     private String lerLabels(String arq) {
@@ -52,9 +52,6 @@ public class Tradutor {
         }
         return arqFinal;
     }
-
-    private String resolverLabels(String arq) {
-        
-    }
-
+    
+    
 }
