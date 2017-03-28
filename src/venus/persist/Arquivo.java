@@ -15,7 +15,7 @@ public class Arquivo {
     
     public static Arquivo getInstance(){
         if(instance == null)
-            return (new Arquivo());
+            instance = new Arquivo();
         return instance;
     }
     

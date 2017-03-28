@@ -1,4 +1,4 @@
-package venus.cpu.memoria;
+package cpu.memoria;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class MemoriaPrincipal {
     
     public static MemoriaPrincipal getInstance(){
         if(instance == null)
-            return (new MemoriaPrincipal());
+            instance = new MemoriaPrincipal();
         return instance;
     }
     
