@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Persist;
+package venus.Persist;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -80,7 +80,7 @@ public class Dicionario {
             String linha = arquivo.readLine();
             while(linha != null){
                 String termos[] = linha.split(":");                
-                add(termos[0],Short.parseShort(termos[1]),nomeArq);
+                add(termos[0],Short.parseShort(termos[1],2),nomeArq);
                 linha = arquivo.readLine();
             }
             arquivo.close();
