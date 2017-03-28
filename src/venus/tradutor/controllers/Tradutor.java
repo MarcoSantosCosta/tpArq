@@ -54,7 +54,7 @@ public class Tradutor {
     }
 
     private String resolverLabels(String arq) {
-        
+        return "To Do...";
     }
 
 }
