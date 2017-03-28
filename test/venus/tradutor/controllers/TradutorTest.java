@@ -21,7 +21,7 @@ public class TradutorTest {
     @Test
     public void testTraduzir() {
         System.out.println("traduzir");
-        String nomeOrigen = "multiplica.asm";
+        String nomeOrigen = "logica.asm";
         String nomeDestino = "teste1.txt";
         Tradutor instance = Tradutor.getInstance();
         instance.traduzir(nomeOrigen, nomeDestino);

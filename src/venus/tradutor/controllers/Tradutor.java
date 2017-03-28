@@ -5,9 +5,9 @@
  */
 package venus.tradutor.controllers;
 
-import Persist.Dicionario;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import venus.persist.Dicionario;
 import venus.tradutor.Arquivo;
 import venus.tradutor.instrucoes.Instrucao;
 import venus.tradutor.instrucoes.Instrucao1;
@@ -63,8 +63,25 @@ public class Tradutor {
         try {
             FileWriter arq = new FileWriter(nomeArquivo);
             for (Instrucao instrucao : instrucoes) {
+                if (instrucao instanceof Instrucao1) {
+                    System.err.print("TIPO1:");
+                } else if (instrucao instanceof Instrucao2) {
+                    System.err.print("TIPO2:");
+                } else if (instrucao instanceof Instrucao3) {
+                    System.err.print("TIPO3:");
+                } else if (instrucao instanceof Instrucao4) {
+                    System.err.print("TIPO4:");
+                } else if (instrucao instanceof Instrucao5) {
+                    System.err.print("TIPO5:");
+                } else if (instrucao instanceof Instrucao6) {
+                    System.err.print("TIPO6:");
+                } else if (instrucao instanceof Instrucao7) {
+                    System.err.print("TIPO7:");
+                }
+
                 System.err.println(instrucao.getBin());
-                arq.append(instrucao.getBin()+"\n");
+
+                arq.write(instrucao.getBin() + "\n");
             }
             arq.close();
         } catch (Exception e) {
@@ -81,7 +98,7 @@ public class Tradutor {
         short ra = 0;
         short rb = 0;
         if (parametros.length > 1) {
-          //  System.err.println("Parametro 2: " + dic.getReg(parametros[1]));
+            //  System.err.println("Parametro 2: " + dic.getReg(parametros[1]));
             ra = dic.getReg(parametros[1]);
         }
         if (parametros.length > 2) {
@@ -110,7 +127,7 @@ public class Tradutor {
         return new Instrucao3(func, rc, r, (short) 0, offset8);
     }
 
-    private Instrucao factoryTipo4(String instrucao) {
+    private Instrucao factoryTipo4(String instrucao,short pc) {
         //System.err.println("Instrucao: F4: " + instrucao);
         String[] parts = instrucao.split(" ");
         //System.err.println("Parte 0: " + parts[0]);
@@ -120,14 +137,16 @@ public class Tradutor {
         short op = dic.getOp(funcao[0]);
         short cond = dic.getCond(funcao[1]);
         short offset8 = labels.get(parts[1]);
+        offset8 = (short) (offset8 - pc);
         return new Instrucao4(func, op, cond, offset8);
     }
 
-    private Instrucao factoryTipo5(String instrucao) {
+    private Instrucao factoryTipo5(String instrucao,int pc) {
         String[] parts = instrucao.split(" ");
         short func = dic.getFunc(parts[0]);
         short op = dic.getOp(parts[0]);
         short offset12 = labels.get(parts[1]);
+        offset12 = (short) (offset12 - pc);
         return new Instrucao5(func, op, offset12);
 
     }
@@ -162,10 +181,11 @@ public class Tradutor {
     private ArrayList<Instrucao> factory(String arq) {
         ArrayList<Instrucao> bins = new ArrayList();
         String instrucoes[] = arq.split("\n");
+        short pc = 0;
         for (String instrucao : instrucoes) {
             String[] parts = instrucao.split(" ");
             if (parts[0].contains(".")) {
-                bins.add(factoryTipo4(instrucao));
+                bins.add(factoryTipo4(instrucao,pc));
             } else {
                 String operacao = parts[0];
 //                System.err.println("Instrucao: " + instrucao);
@@ -173,31 +193,31 @@ public class Tradutor {
                 short func = dic.getFunc(operacao);
                 short op;
                 switch (func) {
-                    case 01:
+                    case 1:
                         op = dic.getOp(operacao);
-                        if (op == 10100 || op == 10110) {
+                        if (op == 20 || op == 22) {
                             bins.add(factoryTipo7(instrucao));
                         } else {
                             bins.add(factoryTipo1(instrucao));
                         }
                         break;
-                    case 10:
+                    case 2:
                         bins.add(factoryTipo2(instrucao));
                         break;
-                    case 11:
+                    case 3:
                         bins.add(factoryTipo3(instrucao));
                         break;
-                    case 00:
+                    case 0:
                         op = dic.getOp(operacao);
                         switch (op) {
-                            case 10:
-                                bins.add(factoryTipo5(instrucao));
+                            case 2:
+                                bins.add(factoryTipo5(instrucao,pc));
                                 break;
-                            case 11:
+                            case 3:
                                 bins.add(factoryTipo6(instrucao));
                                 break;
                             default:
-                                bins.add(factoryTipo7(instrucao));
+                                bins.add(factoryTipo4(instrucao,pc));
                                 break;
                         }
 
