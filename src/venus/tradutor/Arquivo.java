@@ -50,7 +50,7 @@ public class Arquivo {
             FileWriter arq = new FileWriter(nomeArquivo);
             for (String i : binInstrucoes) {
                 arq.write(i);
-                arq.write("\r\n");
+                arq.write("\n");
             }
             arq.close();
         }

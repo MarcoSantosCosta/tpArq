@@ -4,32 +4,30 @@ package venus.tradutor.instrucoes;
  *
  * @author neche
  */
-public class Instrucao6 implements Instrucao {
-
+public class Halt implements Instrucao{
     private short func;
+    private short rc;
     private short op;
-    private short r;
-    private short dontCare;
+    private short ra;
     private short rb;
-
-    public Instrucao6(short func, short op, short r, short dontCare, short rb) {
+    
+    public Halt(short func,short rc,short op,short ra,short rb){
         this.func = func;
+        this.rc = rc;
         this.op = op;
-        this.r = r;
-        this.dontCare = dontCare;
+        this.ra = ra;
         this.rb = rb;
     }
-
+    
     /**
      * Retorna a instrucao em forma de binario
-     *
      * @return String da instrucao pronta para ser escrita
      */
-    public String getBin() {
-        int conta = (short) ((func << 14) | (op << 12) | (r << 11) | (dontCare << 3) | rb);
+    public String getBin(){
+        int conta = (short)((func << 14) | (rc << 11) | (op << 6) | (ra << 3) | rb);
         String retorno = Integer.toBinaryString(conta);
         String aux = "";
-        for (int i = 0; i < 16 - retorno.length(); i++) {
+        for(int i = 0;i < 16 - retorno.length();i++){
             aux += "0";
         }
         return (aux + retorno);
@@ -50,6 +48,20 @@ public class Instrucao6 implements Instrucao {
     }
 
     /**
+     * @return the rc
+     */
+    public short getRc() {
+        return rc;
+    }
+
+    /**
+     * @param rc the rc to set
+     */
+    public void setRc(short rc) {
+        this.rc = rc;
+    }
+
+    /**
      * @return the op
      */
     public short getOp() {
@@ -64,31 +76,17 @@ public class Instrucao6 implements Instrucao {
     }
 
     /**
-     * @return the r
+     * @return the ra
      */
-    public short getR() {
-        return r;
+    public short getRa() {
+        return ra;
     }
 
     /**
-     * @param r the r to set
+     * @param ra the ra to set
      */
-    public void setR(short r) {
-        this.r = r;
-    }
-
-    /**
-     * @return the dontCare
-     */
-    public short getDontCare() {
-        return dontCare;
-    }
-
-    /**
-     * @param dontCare the dontCare to set
-     */
-    public void setDontCare(short dontCare) {
-        this.dontCare = dontCare;
+    public void setRa(short ra) {
+        this.ra = ra;
     }
 
     /**

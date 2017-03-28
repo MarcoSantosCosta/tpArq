@@ -4,7 +4,7 @@ package venus.tradutor.instrucoes;
  *
  * @author neche
  */
-public class Instrucao1 {
+public class Instrucao1 implements Instrucao{
     private short func;
     private short rc;
     private short op;

@@ -1,5 +1,7 @@
 package venus.tradutor.controllers;
 
+import java.time.Clock;
+
 /**
  *
  * @author costa
@@ -44,7 +46,7 @@ public class Cleanner {
         String arqFinal = "";
         char last = ' ';
         for (char c : arq.toCharArray()) {
-            if (!((c == ' ') && (last == ' ') || (last == '\n'))) {
+            if (!((c == ' ') && ((last == ' ') || (last == '\n') || (last == ',')))) {
                 arqFinal = arqFinal + c;
             }
             last = c;

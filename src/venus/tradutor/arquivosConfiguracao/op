@@ -1,33 +1,9 @@
-zeros:00000
-and:00010
-andnota:01010
-passa:01001
-xor:00110
-or:00100
-nor:00101
-xnor:00111
-passnota:01000
-ornotb:01011
-nand:00011
-ones:00001
-add:11000
-addinc:11010
-inca:11100
-subdec:11011
-sub:11001
-deca:11101
-lsl:10000
-lsr:10010
-asr:10011
-asl:10001
-lcl:0
-lch:1
 jf:00
 jt:01
 j:10
 jal:11
 jr:11
-load:10100
-ld:10100
-store:10110
-st:10110
+load = 10100
+ld = 10100
+store =  10110
+st = 10110

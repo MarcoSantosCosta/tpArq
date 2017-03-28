@@ -42,7 +42,7 @@ public class DicionarioTest {
      */
     @Test
     public void testGetInstance_3args() {
-        Dicionario dicionario = Dicionario.getInstance("op.txt","func.txt","type.txt");
+        Dicionario dicionario = Dicionario.getInstance("op","func", "func", "reg", "r", "cond");
         assertNotNull(dicionario);
     }
 
@@ -51,7 +51,7 @@ public class DicionarioTest {
      */
     @Test
     public void testGetFunc() {
-        Dicionario dicionario = Dicionario.getInstance("op.txt","func.txt","type.txt");        
+        Dicionario dicionario = Dicionario.getInstance("op","func", "func", "reg", "r", "cond");       
         short result = dicionario.getFunc("add");
         assertEquals(0b1,result);
     }
@@ -61,7 +61,7 @@ public class DicionarioTest {
      */
     @Test
     public void testGetOp() {
-        Dicionario dicionario = Dicionario.getInstance("op.txt","func.txt","type.txt");        
+        Dicionario dicionario = Dicionario.getInstance("op","func", "func", "reg", "r", "cond");      
         short result = dicionario.getOp("add");
         assertEquals(0b1,result);
     }
@@ -71,7 +71,7 @@ public class DicionarioTest {
      */
     @Test
     public void testGetType() {
-        Dicionario dicionario = Dicionario.getInstance("op.txt","func.txt","type.txt");        
+        Dicionario dicionario = Dicionario.getInstance("op","func", "func", "reg", "r", "cond");        
         short result = dicionario.getType("add");
         assertEquals(0b1,result);
     }

@@ -24,9 +24,11 @@ public class CleannerTest {
     @Test
     public void testEspacos() {
         Cleanner instance = Cleanner.getInstance();
-        String test = "\n\n\nAAAAAA\n\n\n\n\nBBBB\t\t\tBB  \n B";
+        String test = "\n\n\nA A, A, A AA\n\n\n\n\nBBBB\t\t\tBB  \n B";
+        
         test = instance.clean(test);
-        assertFalse(test.contains("  "));     
+        assertFalse(test.contains("  "));   
+        assertFalse(test.contains(", "));   
     }
     @Test
     public void testComentarios() {

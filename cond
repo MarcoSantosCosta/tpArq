@@ -1,0 +1,6 @@
+neg:0100
+zero:0101
+carry:0110
+negzero:0111
+true:0000
+overflow:0011
