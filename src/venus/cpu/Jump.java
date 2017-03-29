@@ -5,6 +5,8 @@
  */
 package venus.cpu;
 
+import venus.cpu.unidades.IF;
+
 /**
  * Classe que resolve os jumps incon
  * @author Diego
@@ -31,24 +33,24 @@ public class Jump {
     
     public void checkJump(){
         if(unidadeDeControle.getJump()){                
-                if(unidadeDeControle.getOp() == 0b0){
-                    if(){
-
-                    }
+            ExtensorSinal extensor = ExtensorSinal.getInstance();
+            if(unidadeDeControle.getOp() == 0b0){
+                if(ula.){
+                    //desvio relativo
                 }
-                else if(unidadeDeControle.getOp() == 0b01){
-
-                }
-                else if(unidadeDeControle.getOp() == 0b10){
-
-                }
-                else if(unidadeDeControle.getR() == 0b0){
-
-                }
-                else{
-
-                }                
             }
+            else if(unidadeDeControle.getOp() == 0b01){
+                //desvio relativo
+            }
+            else if(unidadeDeControle.getOp() == 0b10){
+               short desvio = If.getSubBin(4, 12);
+            }
+            else if(unidadeDeControle.getR() == 0b0){
+
+            }
+            else{
+
+            }                            
         }        
     }
 }

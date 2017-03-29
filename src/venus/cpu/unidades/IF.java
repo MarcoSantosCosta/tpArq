@@ -5,7 +5,7 @@
  */
 package venus.cpu.unidades;
 
-import cpu.memoria.MemoriaRegistrador;
+import venus.cpu.memoria.MemoriaRegistrador;
 import venus.cpu.memoria.InstructionMemory;
 
 /**

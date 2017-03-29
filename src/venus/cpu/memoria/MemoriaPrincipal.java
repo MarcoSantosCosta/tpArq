@@ -1,4 +1,4 @@
-package cpu.memoria;
+package venus.cpu.memoria;
 
 import java.util.ArrayList;
 import java.util.List;
