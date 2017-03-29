@@ -9,12 +9,13 @@ import venus.cpu.memoria.MemoriaRegistrador;
 import venus.cpu.unidades.IF;
 import venus.cpu.unidades.unidadesComplementares.ExtensorSinal;
 import venus.cpu.controller.ULA;
+import venus.cpu.unidades.Unidades;
 
 /**
  * Classe que resolve todos os jumps
  * @author Diego
  */
-public class Jump {    
+public class Jump implements Unidades{    
     private static Jump instance = null;
     private IF If;
     private Controle unidadeDeControle;
@@ -28,7 +29,9 @@ public class Jump {
         instance = new Jump();
         return instance;
     }
-    
+    /**
+     * Construtor privado da classe Jump
+     */
     private Jump(){
         If = IF.getInstance();
         ula = ULA.getInstance();
@@ -38,6 +41,7 @@ public class Jump {
     /**
      * Método que é executado todo clock para testar se há um desvio ou nao
      */
+    @Override
     public void clock(){
         checkJump();
     }

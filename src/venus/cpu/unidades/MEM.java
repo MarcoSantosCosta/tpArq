@@ -2,6 +2,7 @@ package venus.cpu.unidades;
 
 import venus.cpu.memoria.MemoriaPrincipal;
 import venus.cpu.Controle;
+import venus.cpu.controller.ULA;
 
 /**
  *
@@ -25,6 +26,7 @@ public class MEM implements Unidades{
         return instance;
     }
     
+    @Override
     public void clock(){
         //pega o controle
         Controle c = Controle.getInstance();

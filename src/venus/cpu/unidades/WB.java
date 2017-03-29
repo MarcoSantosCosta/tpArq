@@ -2,6 +2,7 @@ package venus.cpu.unidades;
 
 import venus.cpu.Controle;
 import venus.cpu.memoria.MemoriaRegistrador;
+import venus.cpu.controller.ULA;
 
 /**
  *
@@ -53,6 +54,7 @@ public class WB implements Unidades{
     /**
      * Metodo que executo as operacoes das unidades funcionais.
      */
+    @Override
     public void clock() {
         this.setValorEtrada();
         this.setRegDestino();
