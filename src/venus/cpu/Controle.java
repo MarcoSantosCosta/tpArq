@@ -13,7 +13,6 @@ public class Controle {
     private short r;
 
     private short ALUop;
-    private boolean regDst;
     private boolean regWrite;
     private boolean ALUsrc;
     private boolean memWrite;
@@ -29,7 +28,6 @@ public class Controle {
         this.r = 0;
 
         ALUop = 0;
-        regDst = false;
         regWrite = false;
         ALUsrc = false;
         memWrite = false;
@@ -56,7 +54,6 @@ public class Controle {
             case 0:
                 op = pif.getSubBin(2, 2);
                 ALUop = (short) ((getFunc() << 5) | (getOp() & 0b11));
-                regDst = false;
                 regWrite = false;
                 ALUsrc = false;
                 memWrite = false;
@@ -64,14 +61,12 @@ public class Controle {
                 memRead = false;
                 jump = true;
                 if (getOp() == 3 && pif.getSubBin(6, 1) == 0) {
-                    regDst = true;
                     regWrite = true;
                 }
                 break;
             case 1:
                 op = pif.getSubBin(5, 5);
                 ALUop = (short) ((getFunc() << 5) | (getOp() & 0b11111));
-                regDst = false;
                 regWrite = false;
                 ALUsrc = false;
                 memWrite = false;
@@ -82,7 +77,6 @@ public class Controle {
             case 2:
                 op = (short) 0;
                 ALUop = (short) ((getFunc() << 5) | getOp());
-                regDst = true;
                 regWrite = true;
                 ALUsrc = true;
                 memWrite = false;
@@ -93,7 +87,6 @@ public class Controle {
             case 3:
                 op = (short) 0;
                 ALUop = (short) ((getFunc() << 5) | getOp());
-                regDst = true;
                 regWrite = true;
                 ALUsrc = true;
                 memWrite = false;
@@ -133,13 +126,6 @@ public class Controle {
      */
     public short getALUop() {
         return ALUop;
-    }
-
-    /**
-     * @return the regDst
-     */
-    public boolean getRegDst() {
-        return regDst;
     }
 
     /**
