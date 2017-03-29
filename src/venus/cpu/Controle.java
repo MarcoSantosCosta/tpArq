@@ -12,9 +12,9 @@ public class Controle {
     private short op;
     private short r;
 
-    private short ALUop;
+    private short ULAop;
     private boolean regWrite;
-    private boolean ALUsrc;
+    private boolean ULAsrc;
     private boolean memWrite;
     private boolean memToReg;
     private boolean memRead;
@@ -27,9 +27,9 @@ public class Controle {
         this.op = 0;
         this.r = 0;
 
-        ALUop = 0;
+        ULAop = 0;
         regWrite = false;
-        ALUsrc = false;
+        ULAsrc = false;
         memWrite = false;
         memToReg = false;
         memRead = false;
@@ -53,9 +53,9 @@ public class Controle {
         switch (getFunc()) {
             case 0:
                 op = pif.getSubBin(2, 2);
-                ALUop = (short) ((getFunc() << 5) | (getOp() & 0b11));
+                ULAop = (short) ((getFunc() << 5) | (getOp() & 0b11));
                 regWrite = false;
-                ALUsrc = false;
+                ULAsrc = false;
                 memWrite = false;
                 memToReg = false;
                 memRead = false;
@@ -66,9 +66,9 @@ public class Controle {
                 break;
             case 1:
                 op = pif.getSubBin(5, 5);
-                ALUop = (short) ((getFunc() << 5) | (getOp() & 0b11111));
+                ULAop = (short) ((getFunc() << 5) | (getOp() & 0b11111));
                 regWrite = false;
-                ALUsrc = false;
+                ULAsrc = false;
                 memWrite = false;
                 memToReg = false;
                 memRead = false;
@@ -76,9 +76,9 @@ public class Controle {
                 break;
             case 2:
                 op = (short) 0;
-                ALUop = (short) ((getFunc() << 5) | getOp());
+                ULAop = (short) ((getFunc() << 5) | getOp());
                 regWrite = true;
-                ALUsrc = true;
+                ULAsrc = true;
                 memWrite = false;
                 memToReg = false;
                 memRead = false;
@@ -86,9 +86,9 @@ public class Controle {
                 break;
             case 3:
                 op = (short) 0;
-                ALUop = (short) ((getFunc() << 5) | getOp());
+                ULAop = (short) ((getFunc() << 5) | getOp());
                 regWrite = true;
-                ALUsrc = true;
+                ULAsrc = true;
                 memWrite = false;
                 memToReg = false;
                 memRead = false;
@@ -122,10 +122,10 @@ public class Controle {
     }
 
     /**
-     * @return the ALUop
+     * @return the ULAop
      */
-    public short getALUop() {
-        return ALUop;
+    public short getULAop() {
+        return ULAop;
     }
 
     /**
@@ -136,10 +136,10 @@ public class Controle {
     }
 
     /**
-     * @return the ALUsrc
+     * @return the ULAsrc
      */
-    public boolean getALUsrc() {
-        return ALUsrc;
+    public boolean getULAsrc() {
+        return ULAsrc;
     }
 
     /**
