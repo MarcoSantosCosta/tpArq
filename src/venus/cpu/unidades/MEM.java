@@ -34,11 +34,9 @@ public class MEM {
         
         if(c.getMemRead()){//se tiver que ler
             endereco = ula.getResult();//onde deve ler
-            
             readData = banco.get(endereco);
         }else if(c.getMemWrite()){//se tiver que escrever
             endereco = ula.getResult();//onde deve escrever
-            
             banco.inserir(endereco, (short) id.getReadData2());
         }
     }

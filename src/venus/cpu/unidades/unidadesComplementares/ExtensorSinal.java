@@ -5,6 +5,8 @@
  */
 package venus.cpu.unidades.unidadesComplementares;
 
+import venus.cpu.unidades.IF;
+
 /**
  *
  * @author Marco
@@ -12,9 +14,10 @@ package venus.cpu.unidades.unidadesComplementares;
 public class ExtensorSinal {
 
     private static ExtensorSinal instance = null;
+    private IF instructionFetch;
 
     private ExtensorSinal() {
-
+        this.instructionFetch = IF.getInstance();
     }
 
     public static ExtensorSinal getInstance() {
@@ -26,11 +29,24 @@ public class ExtensorSinal {
 
     /**
      * Extende um valor de 12 bits para 16 bits
+     *
      * @param num numero de 12 bits a ter o sinal extedido
      * @return numero de 16 bits com sinal extendido
      */
-    public static short exetender12(short num) {
+    public short exetender12() {
+        short num = instructionFetch.getSubBin(4, 12);
         if ((num >>> (11)) == 1) {
+            short aux = (short) (0b1111111111111111);
+            aux = (short) (aux ^ ((short) Math.pow(2, 12) - 1));
+            return (short) (num | aux);
+        } else {
+            return num;
+        }
+    }
+
+    public short exetender11() {
+        short num = instructionFetch.getSubBin(5, 11);
+        if ((num >>> (10)) == 1) {
             short aux = (short) (0b1111111111111111);
             aux = (short) (aux ^ ((short) Math.pow(2, 12) - 1));
             return (short) (num | aux);
@@ -41,10 +57,12 @@ public class ExtensorSinal {
 
     /**
      * Extende um valor de 8 bits para 16 bits
+     *
      * @param num numero de 8 bits a ter o sinal extedido
      * @return numero de 16 bits com sinal extendido
      */
-    public static short exetender8(short num) {
+    public short exetender8() {
+        short num = instructionFetch.getSubBin(8, 8);
         if ((num >>> (7)) == 1) {
             short aux = (short) (0b1111111111111111);
             aux = (short) (aux ^ ((short) Math.pow(2, 8) - 1));
