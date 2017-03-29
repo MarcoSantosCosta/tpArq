@@ -9,7 +9,7 @@ import venus.cpu.memoria.MemoriaRegistrador;
  */
 public class WB {
 
-    private WB instance = null;
+    private static WB instance = null;
     private MemoriaRegistrador banco;
     private Controle controle;
     private ULA ula;
@@ -31,7 +31,7 @@ public class WB {
      *
      * @return instancia do Objeto WB
      */
-    public WB getInstance() {
+    public static WB getInstance() {
         if (instance == null) {
             instance = new WB();
         }
@@ -40,9 +40,9 @@ public class WB {
 
     private void setValorEtrada() {
         if (this.controle.getMemToReg()) {
-            this.valorEntrada = mem.getValue();
+            this.valorEntrada = mem.getReadData();
         } else {
-            this.valorEntrada = ULA.getResult();
+            this.valorEntrada = ula.getResult();
         }
     }
 
