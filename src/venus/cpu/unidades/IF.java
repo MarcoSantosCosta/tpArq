@@ -39,14 +39,19 @@ public class IF implements Unidades{
     /**
      * Método que lê a instrução da memoria e atualiza o pc fazendo pc++;
      */
-    public void clock(){        
+    @Override
+    public void clock(){
+        pc = bancoDeRegistradores.getPc();
         if((pc >= memoriaDeInstrucoes.getLimit()) || (pc < 0b0)){
             throw new ArrayIndexOutOfBoundsException("Erro: o PC acessou posicao invalida da memoria de instruções");
         }
-        instrucaoAtual = memoriaDeInstrucoes.get(pc);
-        pc = bancoDeRegistradores.getPc();
+        instrucaoAtual = memoriaDeInstrucoes.get(pc);        
         pc++;
         bancoDeRegistradores.setPc(pc);
+        if(!instrucaoAtual.contains("0")){
+            System.out.println("Deu bao");
+            System.exit(0);
+        }
     }
     /**
      * Método que retorna parte da instrução em um short contendo o valor compreendido entre a posição inicial(inclusive)

@@ -51,7 +51,9 @@ public class InstructionMemory {
         if(memoryPositions.size() < limit){
             memoryPositions.add(instruction);
         }
-        throw new java.lang.IndexOutOfBoundsException("Posicao de memoria invalida. Ela deve estar entre 0 e "+limit);
+        else{
+            throw new java.lang.IndexOutOfBoundsException("Posicao de memoria invalida. Ela deve estar entre 0 e "+limit);
+        }        
     }
     /**
      * Método que retorna a instrução que está contida na memória de instruções
@@ -59,7 +61,7 @@ public class InstructionMemory {
      * @return instrução de 16 bits em formato int
      */
     public String get(int index){
-        if((index > 0) && (index < limit)){
+        if((index >= 0) && (index < limit)){
             try{
                 return memoryPositions.get(index);                            
             }
