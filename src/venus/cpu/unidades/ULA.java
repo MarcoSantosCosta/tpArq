@@ -16,6 +16,10 @@ public class ULA {
     private boolean truee = true;  //0000 TRUE .true
     private boolean overflow;   //0011 Resultado ALU overflow .overflow
     private static ULA instance;
+    
+    public String getStatus(){
+        return "Neg: "+neg+" Zero: "+zero+" Carry: "+carry+"NegZero: "+negzero+"True: "+truee+" OverFlow: "+overflow;
+    }
     /*
     
     
