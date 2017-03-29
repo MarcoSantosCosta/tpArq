@@ -5,11 +5,12 @@
  */
 package venus.cpu;
 
-import venus.cpu.memoria.MemoriaPrincipal;
-import cpu.memoria.MemoriaRegistrador;
+import cpu.memoria.MemoriaPrincipal;
+import venus.cpu.memoria.MemoriaRegistrador;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import venus.cpu.memoria.InstructionMemory;
+import venus.cpu.unidades.IF;
 
 /**
  * Classe que representa o processador Venus. Todas as operações são realizadas aqui e todas as unidades funcionais encontram-se
