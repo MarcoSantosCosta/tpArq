@@ -22,7 +22,7 @@ public class MemoriaPrincipal {
     
     public static MemoriaPrincipal getInstance(){
         if(instance == null)
-            return (new MemoriaPrincipal());
+            instance = new MemoriaPrincipal();
         return instance;
     }
     
