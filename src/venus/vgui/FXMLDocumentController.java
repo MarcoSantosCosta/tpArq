@@ -124,12 +124,12 @@ public class FXMLDocumentController implements Initializable {
 
     private void atualizaRegistradores() {
         lbR0.setText("" + banco.get((short) 0));
-        lbR0.setText("" + banco.get((short) 1));
-        lbR0.setText("" + banco.get((short) 3));
-        lbR0.setText("" + banco.get((short) 4));
-        lbR0.setText("" + banco.get((short) 5));
-        lbR0.setText("" + banco.get((short) 6));
-        lbR0.setText("" + banco.get((short) 7));
+        lbR1.setText("" + banco.get((short) 1));
+        lbR2.setText("" + banco.get((short) 3));
+        lbR3.setText("" + banco.get((short) 4));
+        lbR4.setText("" + banco.get((short) 5));
+        lbR5.setText("" + banco.get((short) 6));
+        lbR6.setText("" + banco.get((short) 7));
         lbPC.setText("" + banco.getPc());
     }
 
@@ -198,6 +198,7 @@ public class FXMLDocumentController implements Initializable {
             cpu.clock();
             atualizar();
         }
+        btnClock.setDisable(true);
     }
 
     @FXML
