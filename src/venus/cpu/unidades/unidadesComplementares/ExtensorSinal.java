@@ -28,9 +28,8 @@ public class ExtensorSinal {
     }
 
     /**
-     * Extende um valor de 12 bits para 16 bits
+     * Extende os 12 ultimos bits da instrucao para 16 bits
      *
-     * @param num numero de 12 bits a ter o sinal extedido
      * @return numero de 16 bits com sinal extendido
      */
     public short exetender12() {
@@ -44,6 +43,11 @@ public class ExtensorSinal {
         }
     }
 
+    /**
+     * Extende os 12 ultimos bits da instrucao para 16 bits
+     *
+     * @return numero de 16 bits com sinal extendido
+     */
     public short exetender11() {
         short num = instructionFetch.getSubBin(5, 11);
         if ((num >>> (10)) == 1) {
@@ -56,9 +60,8 @@ public class ExtensorSinal {
     }
 
     /**
-     * Extende um valor de 8 bits para 16 bits
+     * Extende os 8 ultimos bits da instrucao para 16 bits
      *
-     * @param num numero de 8 bits a ter o sinal extedido
      * @return numero de 16 bits com sinal extendido
      */
     public short exetender8() {

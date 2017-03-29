@@ -8,7 +8,7 @@ package venus.cpu;
 import venus.cpu.memoria.MemoriaRegistrador;
 import venus.cpu.unidades.IF;
 import venus.cpu.unidades.unidadesComplementares.ExtensorSinal;
-import venus.cpu.controller.ULA;
+import venus.cpu.unidades.ULA;
 import venus.cpu.unidades.Unidades;
 
 /**

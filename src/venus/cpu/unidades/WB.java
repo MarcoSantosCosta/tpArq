@@ -2,7 +2,7 @@ package venus.cpu.unidades;
 
 import venus.cpu.Controle;
 import venus.cpu.memoria.MemoriaRegistrador;
-import venus.cpu.controller.ULA;
+import venus.cpu.unidades.ULA;
 
 /**
  *

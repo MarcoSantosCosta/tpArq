@@ -3,16 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package venus.cpu.controller;
+package venus.cpu.unidades;
 
 import venus.cpu.Controle;
-import venus.cpu.unidades.ID;
 import venus.cpu.unidades.unidadesComplementares.ExtensorSinal;
 
-/**
- *
- * @author Andre Chateaubriand
- */
 public class ULA {
 
     private boolean neg;    //0100 Resultado ALU negativo .neg
@@ -32,16 +27,16 @@ public class ULA {
 
     public void clock() {
         a = ID.getInstance().getReadData1();
-        if (Controle.getInstance().getALUsrc()) {
-            if (((Controle.getInstance().getALUop() >>> 5) & 0b11) == 0b10) {
+        if (Controle.getInstance().getULAsrc()) {
+            if (((Controle.getInstance().getULAop()>>> 5) & 0b11) == 0b10) {
                 b = ExtensorSinal.getInstance().exetender8();
-            } else if (((Controle.getInstance().getALUop() >>> 5) & 0b11) == 0b11) {
+            } else if (((Controle.getInstance().getULAop() >>> 5) & 0b11) == 0b11) {
                 b = ExtensorSinal.getInstance().exetender11();
             }
         } else {
             b = ID.getInstance().getReadData2();
         }
-        ALUOp = (short) (Controle.getInstance().getALUop() & 0b11111);
+        ALUOp = (short) (Controle.getInstance().getULAop() & 0b11111);
         int op = (ALUOp & 0b11000) >>> 3;
         switch (op) {
             case 0b10:
