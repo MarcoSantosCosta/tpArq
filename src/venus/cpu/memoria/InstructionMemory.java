@@ -32,7 +32,8 @@ public class InstructionMemory {
         if(instance != null){
             return instance;
         }
-        return new InstructionMemory();
+        instance = new InstructionMemory();
+        return instance;
     }
     /**
      * Método que constroi a memória de instrução

@@ -5,6 +5,7 @@
  */
 package venus.cpu;
 
+import cpu.memoria.MemoriaRegistrador;
 import venus.cpu.memoria.InstructionMemory;
 
 /**
@@ -16,6 +17,7 @@ public class IF {
     private short pc;
     private InstructionMemory memoriaDeInstrucoes;
     private String instrucaoAtual;
+    private MemoriaRegistrador bancoDeRegistradores;
     /**
      * Método static que retorna a unidade funcional IF do processador
      * @return IF do processador
@@ -24,14 +26,15 @@ public class IF {
        if(instance != null){
            return instance;
        }
-       return new IF();
+       instance = new IF();
+       return instance;
     }
     /**
     * Método construtor da classe IF que inicializa o PC com 0 e pega a memoria de instruções do processador
     */
     private IF(){
-       pc = 0;
-       memoriaDeInstrucoes = InstructionMemory.getInstance();
+        bancoDeRegistradores = MemoriaRegistrador.getInstance();        
+        memoriaDeInstrucoes = InstructionMemory.getInstance();
     }
     /**
      * Método que lê a instrução da memoria e atualiza o pc fazendo pc++;
@@ -41,7 +44,9 @@ public class IF {
             throw new ArrayIndexOutOfBoundsException("Erro: o PC acessou posicao invalida da memoria de instruções");
         }
         instrucaoAtual = memoriaDeInstrucoes.get(pc);
+        pc = bancoDeRegistradores.getPc();
         pc++;
+        bancoDeRegistradores.setPc(pc);
     }
     /**
      * Método que retorna parte da instrução em um short contendo o valor compreendido entre a posição inicial(inclusive)
@@ -60,7 +65,7 @@ public class IF {
      * @return um short que representa o pc
      */
     public short getPc(){
-        return pc;
+        return bancoDeRegistradores.getPc();
     }
     /**
      * Método que altera o PC utilizando endereçamento relativo à PC
@@ -68,13 +73,16 @@ public class IF {
      * para recuar na memória de instruções
      */
     public void setPcRelativo(short desvio){
+        pc = bancoDeRegistradores.getPc();
         pc += desvio;
+        bancoDeRegistradores.setPc(pc);
     }
     /**
      * Método que desvia para o endereço contido no registrador de jump
      * @param desvio 
      */
     public void setPcPseudoDireto(short desvio){
-        pc = desvio;        
+        pc = desvio;
+        bancoDeRegistradores.setPc(pc);
     }
 }
