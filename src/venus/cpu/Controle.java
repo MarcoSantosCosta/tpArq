@@ -1,14 +1,17 @@
 package venus.cpu;
 
+import venus.cpu.unidades.IF;
+
 /**
  *
  * @author neche
  */
 public class Controle {
+
     private short func;
     private short op;
     private short r;
-    
+
     private short ALUop;
     private boolean regDst;
     private boolean regWrite;
@@ -17,14 +20,14 @@ public class Controle {
     private boolean memToReg;
     private boolean memRead;
     private boolean jump;
-    
+
     private static Controle instance = null;
-    
-    private Controle(){
+
+    private Controle() {
         this.func = 0;
         this.op = 0;
         this.r = 0;
-        
+
         ALUop = 0;
         regDst = false;
         regWrite = false;
@@ -33,72 +36,75 @@ public class Controle {
         memToReg = false;
         memRead = false;
         jump = false;
-    };
+    }
+
+    ;
     
-    public static Controle getInstance(){
-        if(instance == null)
-            return (new Controle());
+    public static Controle getInstance() {
+        if (instance == null) {
+            instance = new Controle();
+        }
         return instance;
     }
-    
-    public void clock(){
+
+    public void clock() {
         //gets do IF
         IF pif = IF.getInstance();
-        func = pif.getSubBin(0,2);
-        
+        func = pif.getSubBin(0, 2);
+
         switch (getFunc()) {
             case 0:
-                op = pif.getSubBin(2,2);
-                ALUop = (short)((getFunc()<<5) | (getOp()&0b11));
-                regDst=false;
-                regWrite=false;
-                ALUsrc=false;
-                memWrite=false;
-                memToReg=false;
-                memRead=false;
-                jump=true;
-                if(getOp() == 3 && pif.getSubBin(6,1) == 0){
-                    regDst=true;
-                    regWrite=true;
-                }   break;
+                op = pif.getSubBin(2, 2);
+                ALUop = (short) ((getFunc() << 5) | (getOp() & 0b11));
+                regDst = false;
+                regWrite = false;
+                ALUsrc = false;
+                memWrite = false;
+                memToReg = false;
+                memRead = false;
+                jump = true;
+                if (getOp() == 3 && pif.getSubBin(6, 1) == 0) {
+                    regDst = true;
+                    regWrite = true;
+                }
+                break;
             case 1:
-                op = pif.getSubBin(5,5);
-                ALUop = (short)((getFunc()<<5) | (getOp()&0b11111));
-                regDst=false;
-                regWrite=false;
-                ALUsrc=false;
-                memWrite=false;
-                memToReg=false;
-                memRead=false;
-                jump=false;
+                op = pif.getSubBin(5, 5);
+                ALUop = (short) ((getFunc() << 5) | (getOp() & 0b11111));
+                regDst = false;
+                regWrite = false;
+                ALUsrc = false;
+                memWrite = false;
+                memToReg = false;
+                memRead = false;
+                jump = false;
                 break;
             case 2:
                 op = (short) 0;
-                ALUop = (short)((getFunc()<<5) | getOp());
-                regDst=true;
-                regWrite=true;
-                ALUsrc=true;
-                memWrite=false;
-                memToReg=false;
-                memRead=false;
-                jump=false;
+                ALUop = (short) ((getFunc() << 5) | getOp());
+                regDst = true;
+                regWrite = true;
+                ALUsrc = true;
+                memWrite = false;
+                memToReg = false;
+                memRead = false;
+                jump = false;
                 break;
             case 3:
                 op = (short) 0;
-                ALUop = (short)((getFunc()<<5) | getOp());
-                regDst=true;
-                regWrite=true;
-                ALUsrc=true;
-                memWrite=false;
-                memToReg=false;
-                memRead=false;
-                jump=false;
+                ALUop = (short) ((getFunc() << 5) | getOp());
+                regDst = true;
+                regWrite = true;
+                ALUsrc = true;
+                memWrite = false;
+                memToReg = false;
+                memRead = false;
+                jump = false;
                 break;
             default:
                 break;
         }
-        
-        
+
     }
 
     /**
@@ -132,50 +138,50 @@ public class Controle {
     /**
      * @return the regDst
      */
-    public boolean isRegDst() {
+    public boolean getRegDst() {
         return regDst;
     }
 
     /**
      * @return the regWrite
      */
-    public boolean isRegWrite() {
+    public boolean getRegWrite() {
         return regWrite;
     }
 
     /**
      * @return the ALUsrc
      */
-    public boolean isALUsrc() {
+    public boolean getALUsrc() {
         return ALUsrc;
     }
 
     /**
      * @return the memWrite
      */
-    public boolean isMemWrite() {
+    public boolean getMemWrite() {
         return memWrite;
     }
 
     /**
      * @return the memToReg
      */
-    public boolean isMemToReg() {
+    public boolean getMemToReg() {
         return memToReg;
     }
 
     /**
      * @return the memRead
      */
-    public boolean isMemRead() {
+    public boolean getMemRead() {
         return memRead;
     }
 
     /**
      * @return the jump
      */
-    public boolean isJump() {
+    public boolean getJump() {
         return jump;
     }
-    
+
 }
