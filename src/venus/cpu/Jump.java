@@ -5,7 +5,9 @@
  */
 package venus.cpu;
 
+import venus.cpu.memoria.MemoriaRegistrador;
 import venus.cpu.unidades.IF;
+import venus.cpu.unidades.unidadesComplementares.ExtensorSinal;
 
 /**
  * Classe que resolve os jumps incon
@@ -15,6 +17,7 @@ public class Jump {
     private static Jump instance = null;
     private IF If;
     private Controle unidadeDeControle;
+    private MemoriaRegistrador bancoDeRegistradores;
     private ULA ula;
     
     public static Jump getInstance(){
@@ -29,10 +32,19 @@ public class Jump {
         If = IF.getInstance();
         ula = ULA.getInstance();
         unidadeDeControle = Controle.getInstance();
+        bancoDeRegistradores = MemoriaRegistrador.getInstance();
     }
-    
-    public void checkJump(){
-        if(unidadeDeControle.getJump()){                
+    /**
+     * Método que é executado toda vez que é
+     */
+    public void clock(){
+        checkJump();
+    }
+    /**
+     * Método que verifica a existencia de um jump e desvia caso necessário
+     */    
+    private void checkJump(){
+        if(unidadeDeControle.getJump()){
             ExtensorSinal extensor = ExtensorSinal.getInstance();
             if(unidadeDeControle.getOp() == 0b0){
                 if(ula.){
@@ -40,16 +52,24 @@ public class Jump {
                 }
             }
             else if(unidadeDeControle.getOp() == 0b01){
-                //desvio relativo
+                if(ula.){
+                    //desvio relativo    
+                }                    
             }
             else if(unidadeDeControle.getOp() == 0b10){
-               short desvio = If.getSubBin(4, 12);
+                short desvio = extensor.exetender12();
+                If.setPcRelativo(desvio);
             }
             else if(unidadeDeControle.getR() == 0b0){
-
+                short reg = 7;
+                bancoDeRegistradores.inserir(reg,If.getPc());
+                //pega o valor do registrador B e seto ele como o desvio
+                short desvio = bancoDeRegistradores.get(If.getSubBin(13,3));
+                If.setPcPseudoDireto(desvio);                
             }
             else{
-
+                short desvio = bancoDeRegistradores.get(If.getSubBin(13, 3));
+                If.setPcPseudoDireto(desvio);                
             }                            
         }        
     }

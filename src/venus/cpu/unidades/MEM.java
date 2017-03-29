@@ -1,6 +1,6 @@
 package venus.cpu.unidades;
 
-import cpu.memoria.MemoriaPrincipal;
+import venus.cpu.memoria.MemoriaPrincipal;
 import venus.cpu.Controle;
 
 /**
