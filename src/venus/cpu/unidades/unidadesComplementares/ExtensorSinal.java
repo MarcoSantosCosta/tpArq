@@ -46,7 +46,7 @@ public class ExtensorSinal {
 
     public short exetender11() {
         short num = instructionFetch.getSubBin(5, 11);
-        if ((num >>> (11)) == 1) {
+        if ((num >>> (10)) == 1) {
             short aux = (short) (0b1111111111111111);
             aux = (short) (aux ^ ((short) Math.pow(2, 12) - 1));
             return (short) (num | aux);
