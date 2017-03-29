@@ -84,6 +84,7 @@ public class Cpu {
         ula.clock();
         mem.clock();
         wb.clock();
+        System.out.println("pos1000:"+MemoriaPrincipal.getInstance().get(1000));
     }
 
 }

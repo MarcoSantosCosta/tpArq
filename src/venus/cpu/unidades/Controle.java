@@ -46,7 +46,7 @@ public class Controle {
         //gets do IF
         IF pif = IF.getInstance();
         func = pif.getSubBin(0, 2);
-                switch (getFunc()) {
+        switch (func) {
             case 0:
                 op = pif.getSubBin(2, 2);
                 ULAop = (short) ((getFunc() << 5) | (getOp() & 0b11));
@@ -56,9 +56,6 @@ public class Controle {
                 memToReg = false;
                 memRead = false;
                 jump = true;
-                if (getOp() == 3 && pif.getSubBin(6, 1) == 0) {
-                    regWrite = true;
-                }
                 break;
             case 1:
                 op = pif.getSubBin(5, 5);
@@ -69,6 +66,13 @@ public class Controle {
                 memToReg = false;
                 memRead = false;
                 jump = false;
+                
+                if(op == 0b10100){
+                    memRead = true;
+                }
+                if(op == 0b10110){
+                    memWrite = true;
+                }
                 break;
             case 2:
                 op = (short) 0;

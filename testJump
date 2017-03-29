@@ -1,0 +1,58 @@
+;
+; Programa para testar jumps, fornecido pelo Reuber
+;
+; TESTE uRISC - Flags, Jumps condicionais e
+;               incondicionais, instrucoes de
+;               carregamento de constantes, operacoes
+;               aritmeticas
+; RESULTADO DO TESTE: nota de 0 a 10, que no final
+;                     da execucao do programa, estara
+;                     na posicao 1000 de memoria(3e8 em hexa)
+
+; Instrucoes que saltam para as rotinas de tratamento de
+; de interrupcoes
+j RESET
+
+; Inicio do programa
+RESET:
+; Carrega registradores
+loadlit r4, 0   ; r4 contera o score
+loadlit r5, 0
+loadlit r6, 0
+
+
+; -----------------------------------------
+; Primeira bateria de teste:
+; testa jump condicional quando a condicao
+; e falsa
+
+; Teste 1: ocorre overflow
+add r6, r0, r0
+jf.overflow T2    ; desvia
+inca r4, r4      ; OK ! Mais um ponto
+
+
+T2:
+;Teste 3: resultado e negativo
+sub r2, r5, r6
+jf.neg T4         ; nao desvia
+inca r4, r4      ; OK ! Mais um ponto
+
+T4:
+; Teste 4: resultado nao e negativo
+sub r2, r5, r6
+jt.neg T5         ; desvia
+inca r4, r4      ; OK ! Mais um ponto
+
+T5:
+; Teste 5: resultado nao e zero
+sub r2, r5, r6
+jf.zero T6       ; nao desvia
+inca r4, r4      ; OK ! Mais um ponto
+
+T6:
+sub r2, r5, r6
+jt.zero T7       ; desvia
+inca r4, r4      ; OK ! Mais um ponto
+
+L: j L
