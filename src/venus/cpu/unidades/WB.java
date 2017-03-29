@@ -7,7 +7,7 @@ import venus.cpu.memoria.MemoriaRegistrador;
  *
  * @author Marco
  */
-public class WB {
+public class WB implements Unidades{
 
     private static WB instance = null;
     private MemoriaRegistrador banco;

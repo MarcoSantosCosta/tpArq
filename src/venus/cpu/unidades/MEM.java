@@ -7,7 +7,7 @@ import venus.cpu.Controle;
  *
  * @author neche
  */
-public class MEM {
+public class MEM implements Unidades{
     private static MEM instance = null;
     private MemoriaPrincipal banco;
     private int endereco;
