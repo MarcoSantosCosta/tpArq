@@ -42,6 +42,10 @@ public class MEM implements Unidades{
         }
     }
     
+    public String getStatus(){
+        return "Endereco: "+this.endereco+" ReadData: "+this.readData;
+    }
+    
     public short getReadData(){
         return readData;
     }

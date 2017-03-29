@@ -166,6 +166,11 @@ public class Controle {
         return jump;
     }
 
+    public String getStatus(){
+        return "ULAop: "+ULAop+" regWrite: "+regWrite+" ULAsrc: "+ULAsrc+" memWrite: " +memWrite+" memToReg: "+memToReg+"\n"
+                +"memRead: "+memRead+" jump: "+jump+" func: "+func+" op: "+op+" r: "+r;
+    }
+    
     public void test() {
         System.out.println("------------Control------------");
         System.out.println("ULAop: " + ULAop);

@@ -50,7 +50,10 @@ public class WB implements Unidades{
     private void setRegDestino() {
         this.regDestino = instructionFetch.getSubBin(2, 3);
     }
-
+    
+    public String getStatus(){
+        return "RegDest :"+this.regDestino+" Valor :"+this.valorEntrada;
+    }
     /**
      * Metodo que executo as operacoes das unidades funcionais.
      */

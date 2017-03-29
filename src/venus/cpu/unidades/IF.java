@@ -43,10 +43,14 @@ public class IF implements Unidades {
         banco = MemoriaRegistrador.getInstance();
         memoriaDeInstrucoes = InstructionMemory.getInstance();
     }
-
+    
+    public String getStatus(){
+        return "Isnstrução Atual: "+instrucaoAtual+" PC :"+getPc();
+    }
     /**
      * Método que lê a instrução da memoria e atualiza o pc fazendo pc++;
      */
+    @Override
     public void clock() {
         pc = banco.getPc();
 

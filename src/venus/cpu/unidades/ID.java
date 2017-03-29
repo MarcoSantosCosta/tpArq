@@ -52,6 +52,10 @@ public class ID {
         System.out.println("RA: "+ra);
         System.out.println("RB: "+rb);
     }
+    
+    public String getStatus(){
+        return "RA: "+ra+" RB: "+rb;
+    }
 //    /**
 //     * Recebe o numero do registrador [0...7] e define como o registrador de leitura 1
 //     * @param registrador numero de 0 a 7
