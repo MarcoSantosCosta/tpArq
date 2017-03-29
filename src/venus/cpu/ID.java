@@ -24,13 +24,12 @@ public class ID {
         return instance;
     }
     
-    /*public void clock(){
+    public void clock(){
         //gets do IF
-        IF if = IF.getInstance();
-        ra = if.getSubBin(10,3);
-        rb = if.getSubBin(13,3);
-    }*/
-    
+        IF If = IF.getInstance();
+        ra = If.getSubBin(10,3);
+        rb = If.getSubBin(13,3);
+    }    
     /**
      * Retorna a saida ReadData1 do ID
      * @return short com o valor do registrador ra no banco de registradores
