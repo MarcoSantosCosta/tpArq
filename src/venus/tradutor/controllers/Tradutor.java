@@ -49,7 +49,7 @@ public class Tradutor {
      * @param nomeDestino nome do arquivo onde sera escrito o o codigo
      * convertido.
      */
-    public void traduzir(String nomeOrigen, String nomeDestino) {
+    public ArrayList<Instrucao> traduzir(String nomeOrigen, String nomeDestino) {
         Arquivo arquivo = Arquivo.getInstance();
         Cleanner cleanner = Cleanner.getInstance();
         String arq = arquivo.ler(nomeOrigen);
@@ -59,29 +59,30 @@ public class Tradutor {
 //        labels.test();
         ArrayList<Instrucao> instrucoes = factory(arq);
         escrever(instrucoes, nomeDestino);
+        return instrucoes;
     }
 
     private void escrever(ArrayList<Instrucao> instrucoes, String nomeArquivo) {
         try {
             FileWriter arq = new FileWriter(nomeArquivo);
             for (Instrucao instrucao : instrucoes) {
-                if (instrucao instanceof Instrucao1) {
-                    System.err.print("TIPO1:");
-                } else if (instrucao instanceof Instrucao2) {
-                    System.err.print("TIPO2:");
-                } else if (instrucao instanceof Instrucao3) {
-                    System.err.print("TIPO3:");
-                } else if (instrucao instanceof Instrucao4) {
-                    System.err.print("TIPO4:");
-                } else if (instrucao instanceof Instrucao5) {
-                    System.err.print("TIPO5:");
-                } else if (instrucao instanceof Instrucao6) {
-                    System.err.print("TIPO6:");
-                } else if (instrucao instanceof Instrucao7) {
-                    System.err.print("TIPO7:");
-                }
-
-                System.err.println(instrucao.getBin());
+//                if (instrucao instanceof Instrucao1) {
+//                    System.err.print("TIPO1:");
+//                } else if (instrucao instanceof Instrucao2) {
+//                    System.err.print("TIPO2:");
+//                } else if (instrucao instanceof Instrucao3) {
+//                    System.err.print("TIPO3:");
+//                } else if (instrucao instanceof Instrucao4) {
+//                    System.err.print("TIPO4:");
+//                } else if (instrucao instanceof Instrucao5) {
+//                    System.err.print("TIPO5:");
+//                } else if (instrucao instanceof Instrucao6) {
+//                    System.err.print("TIPO6:");
+//                } else if (instrucao instanceof Instrucao7) {
+//                    System.err.print("TIPO7:");
+//                }
+//
+//                System.err.println(instrucao.getBin());
 
                 arq.write(instrucao.getBin() + "\n");
             }
@@ -120,9 +121,9 @@ public class Tradutor {
     }
 
     private Instrucao factoryTipo3(String instrucao) {
-        System.out.println("INSTRUCAO: " + instrucao);
+//        System.out.println("INSTRUCAO: " + instrucao);
         String[] parts = instrucao.split(" ");
-        System.out.println("PART 0: " + parts[0]);
+//        System.out.println("PART 0: " + parts[0]);
         String[] parametros = parts[1].split(",");
         short func = dic.getFunc(parts[0]);
         short rc = dic.getReg(parametros[0]);
@@ -197,19 +198,19 @@ public class Tradutor {
     }
 
     private ArrayList<Instrucao> factory(String arq) {
-        System.err.println("Arq Entrada:\n---------------\n" + arq + "\n---------------\n");
+//        System.err.println("Arq Entrada:\n---------------\n" + arq + "\n---------------\n");
         ArrayList<Instrucao> bins = new ArrayList();
         String instrucoes[] = arq.split("\n");
         short pc = 0;
         for (String instrucao : instrucoes) {
-            System.err.println("PC:" + pc);
+//            System.err.println("PC:" + pc);
             String[] parts = instrucao.split(" ");
             if (parts[0].contains(".")) {
                 bins.add(factoryTipo4(instrucao, pc));
             } else {
                 String operacao = parts[0];
-//                System.err.println("Instrucao: " + instrucao);
-//                System.err.println("Operacao: " + operacao);
+                System.err.println("Instrucao: " + instrucao);
+                System.err.println("Operacao: " + operacao);
                 short func = dic.getFunc(operacao);
                 short op;
                 switch (func) {

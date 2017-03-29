@@ -70,11 +70,14 @@ public class InstructionMemory {
      * @param index indice onde encontra-se a a instrução desejada
      * @return instrução de 16 bits em formato int
      */
+
     public String get(int index) {
         if ((index >= 0) && (index < limit)) {
             try {
                 return memoryPositions.get(index);
             } catch (IndexOutOfBoundsException e) {
+
+
                 throw new IndexOutOfBoundsException("Nao existe valor nessa posicao");
             } catch (Exception e) {
                 //outro erro

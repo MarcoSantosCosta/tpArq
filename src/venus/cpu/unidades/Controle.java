@@ -1,6 +1,4 @@
-package venus.cpu;
-
-import venus.cpu.unidades.IF;
+package venus.cpu.unidades;
 
 /**
  *
@@ -26,14 +24,13 @@ public class Controle {
         this.func = 0;
         this.op = 0;
         this.r = 0;
-
-        ULAop = 0;
-        regWrite = false;
-        ULAsrc = false;
-        memWrite = false;
-        memToReg = false;
-        memRead = false;
-        jump = false;
+        this.ULAop = 0;
+        this.regWrite = false;
+        this.ULAsrc = false;
+        this.memWrite = false;
+        this.memToReg = false;
+        this.memRead = false;
+        this.jump = false;
     }
 
     ;
@@ -49,8 +46,7 @@ public class Controle {
         //gets do IF
         IF pif = IF.getInstance();
         func = pif.getSubBin(0, 2);
-
-        switch (getFunc()) {
+                switch (getFunc()) {
             case 0:
                 op = pif.getSubBin(2, 2);
                 ULAop = (short) ((getFunc() << 5) | (getOp() & 0b11));
@@ -67,7 +63,7 @@ public class Controle {
             case 1:
                 op = pif.getSubBin(5, 5);
                 ULAop = (short) ((getFunc() << 5) | (getOp() & 0b11111));
-                regWrite = false;
+                regWrite = true;
                 ULAsrc = false;
                 memWrite = false;
                 memToReg = false;
@@ -97,7 +93,7 @@ public class Controle {
             default:
                 break;
         }
-
+        test();
     }
 
     /**
@@ -168,6 +164,17 @@ public class Controle {
      */
     public boolean getJump() {
         return jump;
+    }
+
+    public void test() {
+        System.out.println("------------Control------------");
+        System.out.println("ULAop: " + ULAop);
+        System.out.println("regWrite: " + regWrite);
+        System.out.println("ULAsrc: " + ULAsrc);
+        System.out.println("memWrite: " + memWrite);
+        System.out.println("memToReg: " + memToReg);
+        System.out.println("memRead: " + memRead);
+        System.out.println("jump: " + jump);
     }
 
 }

@@ -5,6 +5,7 @@ package venus.cpu.memoria;
  */
 public class MemoriaRegistrador {
 
+    public static boolean TESTE = true;
     private short[] mem;
     private short pc;
     private static MemoriaRegistrador instance = null;
@@ -33,7 +34,7 @@ public class MemoriaRegistrador {
         }
         if (valor < -32768 || valor > 32767) {
             throw new RuntimeException("Valor a ser inserido no registrador " + registrador + " e invalido.");
-        }        
+        }
         this.mem[registrador] = valor;
 
     }

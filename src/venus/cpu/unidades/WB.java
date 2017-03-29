@@ -1,8 +1,6 @@
 package venus.cpu.unidades;
 
-import venus.cpu.Controle;
 import venus.cpu.memoria.MemoriaRegistrador;
-import venus.cpu.unidades.ULA;
 
 /**
  *
@@ -41,8 +39,10 @@ public class WB implements Unidades{
 
     private void setValorEtrada() {
         if (this.controle.getMemToReg()) {
+            System.err.println("Peguei da memoria");
             this.valorEntrada = mem.getReadData();
         } else {
+            System.err.println("Peguei da ula");
             this.valorEntrada = ula.getResult();
         }
     }
@@ -59,6 +59,8 @@ public class WB implements Unidades{
         this.setValorEtrada();
         this.setRegDestino();
         if (controle.getRegWrite()) {
+            System.out.println("RegDest: "+this.regDestino);
+            System.out.println("Valor: "+this.valorEntrada);
             banco.inserir(regDestino, valorEntrada);
         }
     }

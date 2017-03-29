@@ -1,0 +1,4 @@
+zeros r0 ;r0 = 0
+loadlit r1, 4 ;r1 = 4
+add r2, r0, r1 ;r2 = 0 + 4
+X: j X

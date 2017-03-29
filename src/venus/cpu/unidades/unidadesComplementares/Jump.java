@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package venus.cpu;
+package venus.cpu.unidades.unidadesComplementares;
 
+import venus.cpu.unidades.Controle;
 import venus.cpu.memoria.MemoriaRegistrador;
 import venus.cpu.unidades.IF;
-import venus.cpu.unidades.unidadesComplementares.ExtensorSinal;
 import venus.cpu.unidades.ULA;
 import venus.cpu.unidades.Unidades;
 
@@ -114,5 +114,11 @@ public class Jump implements Unidades{
                 If.setPcPseudoDireto(desvio);                
             }                            
         }        
+    }
+    
+    
+    public void testt(){
+        
+        
     }
 }

@@ -5,7 +5,6 @@
  */
 package venus.cpu.unidades;
 
-import venus.cpu.Controle;
 import venus.cpu.unidades.unidadesComplementares.ExtensorSinal;
 
 public class ULA {
@@ -16,6 +15,7 @@ public class ULA {
     private boolean negzero;    //0111 Resultado ALU negativo ou zero .negzero
     private boolean truee = true;  //0000 TRUE .true
     private boolean overflow;   //0011 Resultado ALU overflow .overflow
+    private static ULA instance;
     /*
     
     
@@ -28,7 +28,7 @@ public class ULA {
     public void clock() {
         a = ID.getInstance().getReadData1();
         if (Controle.getInstance().getULAsrc()) {
-            if (((Controle.getInstance().getULAop()>>> 5) & 0b11) == 0b10) {
+            if (((Controle.getInstance().getULAop() >>> 5) & 0b11) == 0b10) {
                 b = ExtensorSinal.getInstance().exetender8();
             } else if (((Controle.getInstance().getULAop() >>> 5) & 0b11) == 0b11) {
                 b = ExtensorSinal.getInstance().exetender11();
@@ -47,12 +47,20 @@ public class ULA {
                 break;
             default:
                 if (((ALUOp >>> 1) & 0b11) == 0b00) {
-                    resolveControl();
+                    //VERIFICAR OPERACAO
+                    if (op == 0) {
+                        result = b;
+                    } else {
+                        resolveControl();
+                    }
                 } else {
                     resolveLogic();
                 }
         }
-
+        System.out.println("ALUP: " + this.ALUOp);
+        System.out.println("RESULT: " + this.result);
+        System.out.println("a: " + this.a);
+        System.out.println("b: " + this.b);
     }
 
     private ULA() {
@@ -188,7 +196,10 @@ public class ULA {
     }
 
     public static ULA getInstance() {
-        return ULAHolder.INSTANCE;
+        if (instance == null) {
+            instance = new ULA();
+        }
+        return instance;
     }
 
     /**
@@ -238,11 +249,6 @@ public class ULA {
      */
     public short getResult() {
         return result;
-    }
-
-    private static class ULAHolder {
-
-        private static final ULA INSTANCE = new ULA();
     }
 
 }

@@ -1,7 +1,6 @@
 package venus.cpu.unidades;
 
 import venus.cpu.memoria.MemoriaPrincipal;
-import venus.cpu.Controle;
 import venus.cpu.unidades.ULA;
 
 /**

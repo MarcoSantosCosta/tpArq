@@ -6,6 +6,8 @@
 package venus;
 
 import venus.cpu.Cpu;
+import venus.cpu.memoria.MemoriaPrincipal;
+import venus.cpu.memoria.MemoriaRegistrador;
 import venus.tradutor.controllers.Tradutor;
 
 /**
@@ -13,12 +15,20 @@ import venus.tradutor.controllers.Tradutor;
  * @author costa
  */
 public class Venus {
-
     public static void testar(Cpu cpu) {
-        for (int i = 0; i < 100; i++) {
-            System.err.println(i);
-            cpu.clock();
+        MemoriaRegistrador mem = MemoriaRegistrador.getInstance();
+        int i = 0;
+        while (MemoriaRegistrador.TESTE) {
+            System.out.println("CLOCK: "+i);
+            for (int j = 0; j < 8; j++) {
+                System.out.println("R" + j + ": " + mem.get((short) j));
+            }
+            cpu.clock();        
+            i++;
         }
+        MemoriaPrincipal memo = MemoriaPrincipal.getInstance();
+        System.out.println("TESTE: " +memo.get(5));
+
     }
 
     /**
@@ -30,7 +40,7 @@ public class Venus {
         Tradutor instance = Tradutor.getInstance();
         instance.traduzir(nomeOrigen, nomeDestino);
         Cpu cpu = new Cpu(nomeDestino);
-        testar(cpu);        
+        testar(cpu);
     }
 
 }

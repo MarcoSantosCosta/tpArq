@@ -29,6 +29,7 @@ public class ID {
         IF If = IF.getInstance();
         ra = If.getSubBin(10,3);
         rb = If.getSubBin(13,3);
+        
     }    
     /**
      * Retorna a saida ReadData1 do ID
@@ -46,7 +47,11 @@ public class ID {
         return banco.get(rb);
     }
     
-    
+    public void test(){
+        System.out.println("------------ID-------");
+        System.out.println("RA: "+ra);
+        System.out.println("RB: "+rb);
+    }
 //    /**
 //     * Recebe o numero do registrador [0...7] e define como o registrador de leitura 1
 //     * @param registrador numero de 0 a 7
