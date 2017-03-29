@@ -10,7 +10,7 @@ public class MemoriaRegistrador {
     private static MemoriaRegistrador instance = null;
 
     private MemoriaRegistrador() {
-        this.mem = new short[7];
+        this.mem = new short[8];
         this.pc = 0;
     }
 
@@ -33,7 +33,7 @@ public class MemoriaRegistrador {
         }
         if (valor < -32768 || valor > 32767) {
             throw new RuntimeException("Valor a ser inserido no registrador " + registrador + " e invalido.");
-        }
+        }        
         this.mem[registrador] = valor;
 
     }

@@ -17,7 +17,7 @@ public class IF implements Unidades{
     private short pc;
     private InstructionMemory memoriaDeInstrucoes;
     private String instrucaoAtual;
-    private MemoriaRegistrador bancoDeRegistradores;
+    private MemoriaRegistrador banco;
     /**
      * Método static que retorna a unidade funcional IF do processador
      * @return IF do processador
@@ -33,20 +33,22 @@ public class IF implements Unidades{
     * Método construtor da classe IF que inicializa o PC com 0 e pega a memoria de instruções do processador
     */
     private IF(){
-        bancoDeRegistradores = MemoriaRegistrador.getInstance();        
+        banco = MemoriaRegistrador.getInstance();        
         memoriaDeInstrucoes = InstructionMemory.getInstance();
     }
     /**
      * Método que lê a instrução da memoria e atualiza o pc fazendo pc++;
      */
-    public void clock(){        
+    public void clock(){ 
+        pc = banco.getPc();
+        
         if((pc >= memoriaDeInstrucoes.getLimit()) || (pc < 0b0)){
             throw new ArrayIndexOutOfBoundsException("Erro: o PC acessou posicao invalida da memoria de instruções");
         }
-        instrucaoAtual = memoriaDeInstrucoes.get(pc);
-        pc = bancoDeRegistradores.getPc();
+        instrucaoAtual = memoriaDeInstrucoes.get(banco.getPc());
+        pc = banco.getPc();
         pc++;
-        bancoDeRegistradores.setPc(pc);
+        banco.setPc(pc);
     }
     /**
      * Método que retorna parte da instrução em um short contendo o valor compreendido entre a posição inicial(inclusive)
@@ -65,7 +67,7 @@ public class IF implements Unidades{
      * @return um short que representa o pc
      */
     public short getPc(){
-        return bancoDeRegistradores.getPc();
+        return banco.getPc();
     }
     /**
      * Método que altera o PC utilizando endereçamento relativo à PC
@@ -73,9 +75,9 @@ public class IF implements Unidades{
      * para recuar na memória de instruções
      */
     public void setPcRelativo(short desvio){
-        pc = bancoDeRegistradores.getPc();
+        pc = banco.getPc();
         pc += desvio;
-        bancoDeRegistradores.setPc(pc);
+        banco.setPc(pc);
     }
     /**
      * Método que desvia para o endereço contido no registrador de jump
@@ -83,6 +85,6 @@ public class IF implements Unidades{
      */
     public void setPcPseudoDireto(short desvio){
         pc = desvio;
-        bancoDeRegistradores.setPc(pc);
+        banco.setPc(pc);
     }
 }

@@ -11,6 +11,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import venus.cpu.memoria.InstructionMemory;
 import venus.cpu.unidades.IF;
+import venus.cpu.unidades.MEM;
+import venus.cpu.unidades.ULA;
+import venus.cpu.unidades.WB;
 
 /**
  * Classe que representa o processador Venus. Todas as operações são realizadas aqui e todas as unidades funcionais encontram-se
@@ -23,7 +26,11 @@ public class Cpu {
     private MemoriaPrincipal memoriaPrincipal;
     private MemoriaRegistrador bancoDeRegistradores;
     private IF If;
-    
+    private Controle controle;
+    private Jump jump;
+    private ULA ula;
+    private MEM mem; 
+    private WB wb;
     /**
      * Construtor do Processador que
      * @param nomePrograma 
@@ -34,6 +41,11 @@ public class Cpu {
         memoriaPrincipal = MemoriaPrincipal.getInstance();
         bancoDeRegistradores = MemoriaRegistrador.getInstance();
         If = IF.getInstance();
+        controle = Controle.getInstance();
+        jump = Jump.getInstance();
+        ula = ULA.getInstance();
+        mem = MEM.getInstance();
+        wb = WB.getInstance();
         carregarPrograma();
     }
     /**
@@ -44,6 +56,7 @@ public class Cpu {
             BufferedReader arquivo = new BufferedReader(new FileReader(nomePrograma));
             String linha = arquivo.readLine();
             while(linha != null){                
+                System.err.println(linha);
                 memoriaDeInstrucoes.add(linha);
                 linha = arquivo.readLine();
             }
@@ -52,5 +65,14 @@ public class Cpu {
         catch(Exception e){
             //Erro
         }
+    }
+    
+    public void clock(){
+        If.clock();
+        controle.clock();
+        jump.clock();
+        ula.clock();
+        mem.clock();
+        wb.clock();        
     }
 }
