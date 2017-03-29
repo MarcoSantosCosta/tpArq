@@ -1,6 +1,6 @@
-package venus.cpu;
+package venus.cpu.unidades;
 
-import cpu.memoria.MemoriaRegistrador;
+import venus.cpu.memoria.MemoriaRegistrador;
 
 /**
  *
@@ -20,7 +20,7 @@ public class ID {
     
     public static ID getInstance(){
         if(instance == null)
-            return (new ID());
+            instance = new ID();
         return instance;
     }
     

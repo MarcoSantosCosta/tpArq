@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package venus.cpu;
+package venus.cpu.unidades;
 
 import cpu.memoria.MemoriaRegistrador;
 import venus.cpu.memoria.InstructionMemory;
