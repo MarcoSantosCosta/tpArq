@@ -12,7 +12,7 @@ import venus.cpu.memoria.InstructionMemory;
  *Classe que representa a unidade funcional ID contendo o pc e acessando a memoria de instruções do processador
  * @author Diego
  */
-public class IF {
+public class IF implements Unidades{
     private static IF instance = null;
     private short pc;
     private InstructionMemory memoriaDeInstrucoes;
